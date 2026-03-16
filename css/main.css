@@ -28,7 +28,39 @@ body {
     display: none;
 }
 
-h1 {
+h1.game-title {
     font-family: "Luckiest Guy";
     font-size: 100px;
+    margin: 0;
+    color: #3d280d;
+}
+
+#screen-title {
+    gap: 100px;
+}
+
+.selection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+}
+
+button {
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+
+    font-family: "Fredoka";
+    font-size: 50px;
+    font-weight: bold;
+    border: 3px black solid;
+    border-radius: 9999px;
+    padding: 5px 50px;
+    background: orange;
+}
+
+button:hover {
+    background: green;
+    color: white;
 }
