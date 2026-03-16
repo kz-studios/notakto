@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reverse Tic Tac To by KaiZen</title>
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
 </head>
 <body>
     <main id="app-container">
@@ -13,8 +14,8 @@
             <h1 class="game-title">Reverse Tic Tac To</h1>
 
             <section class="selection">
-                <button>Play</button>
-                <button>How To Play</button>
+                <button id="btn-play">Play</button>
+                <button id="btn-how-to-play">How To Play</button>
             </section>
             
         </section>
@@ -27,10 +28,35 @@
 
     </main>
 
-    <div id="dialog-overlay" class="hidden">
-
         <dialog id="dialog-how-to-play" class="modal">
-            </dialog>
+            <button id="btn-close-how-to-play" class="close-btn" aria-label="Close">X</button>
+            
+            <div class="slides-container">
+                <div class="slide active">
+                    <img src="assets/images/placeholder1.png" alt="Rule 1">
+                    <p>The goal is the opposite of standard Tic Tac Toe. Force your opponent to get three in a row!</p>
+                </div>
+                <div class="slide hidden">
+                    <img src="assets/images/placeholder2.png" alt="Rule 2">
+                    <p>Players take turns placing their marks on the empty squares of the 3x3 grid.</p>
+                </div>
+                <div class="slide hidden">
+                    <img src="assets/images/placeholder3.png" alt="Rule 3">
+                    <p>If you complete a line of three horizontally, vertically, or diagonally, you lose.</p>
+                </div>
+            </div>
+
+            <div class="slide-arrows">
+                <button id="btn-prev-slide" class="arrow-btn" aria-label="Previous slide">&larr; Prev</button>
+                <button id="btn-next-slide" class="arrow-btn" aria-label="Next slide">Next &rarr;</button>
+            </div>
+
+            <div class="dot-indicators">
+                <button class="dot active" data-slide="0" aria-label="Go to slide 1"></button>
+                <button class="dot" data-slide="1" aria-label="Go to slide 2"></button>
+                <button class="dot" data-slide="2" aria-label="Go to slide 3"></button>
+            </div>
+        </dialog>
 
         <dialog id="dialog-pause" class="modal">
             </dialog>
@@ -38,6 +64,6 @@
         <dialog id="dialog-game-over" class="modal">
             </dialog>
 
-    </div>
+    <script type="module" src="js/app.js"></script>
 </body>
 </html>

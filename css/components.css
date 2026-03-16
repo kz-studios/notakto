@@ -1,0 +1,43 @@
+.slide.active {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+}
+
+#dialog-how-to-play[open] {
+    display: flex;
+    flex-direction: column;
+}
+
+#dialog-how-to-play::backdrop {
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.close-btn {
+    color: red;
+    align-self: flex-end;
+}
+
+.dot {
+    width: 15px;
+    height: 15px;
+    padding: 0;
+    border-radius: 50%;
+    background: lightgray;
+    border: 1px solid gray;
+}
+
+.dot.active {
+    background: darkgray;
+}
+
+.slide-arrows {
+    display: flex;
+    justify-content: space-between;
+}
+
+.dot-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
