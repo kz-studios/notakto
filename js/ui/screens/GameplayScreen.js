@@ -7,6 +7,8 @@ export default class GameplayScreen {
         this.grids = [];
         this.screen = document.querySelector('#screen-gameplay');
         this.gridContainer = this.screen.querySelector('#grid-container');
+
+        this.gameEngine = new GameEngine();
     }
 
     renderGrids() {
@@ -27,9 +29,15 @@ export default class GameplayScreen {
                 cellElement.addEventListener('click', () => {
                     currentGrid.markCell(j);
                     cellElement.classList.toggle('marked', true);
-                    cellElement.innerHTML = '<h1>X</h1>'
+                    cellElement.textContent = 'X';
                     console.log(`Clicked grid-${currentGrid.id}: row ${row}, column ${col}`);
                     console.log(`Grid state: ${currentGrid.gridState.toString(2).padStart(9, '0')}`)
+
+                    if (this.gameEngine.doesGridHaveThreeXInARow(currentGrid.gridState)) {
+                        currentGrid.killGrid(gridElement); 
+                        gridElement.classList.add('dead');
+                        console.log(`Grid-${currentGrid.id} dead`)
+                    }
                 });
             }
 

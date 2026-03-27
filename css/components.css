@@ -59,10 +59,21 @@
     grid-template-columns: repeat(3, 1fr);
 }
 
+.grid.dead {
+    opacity: 0.3;
+    cursor: default;
+    pointer-events: none;
+}
+
 .grid .cell {
     aspect-ratio: 1 / 1;
     background-color: rgba(0, 0, 255, 0.3);
     border: solid black 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: bold;
 }
 
 .grid .cell.marked {
