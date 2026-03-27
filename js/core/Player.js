@@ -1,37 +1,42 @@
 export default class Player {
+    #name;
+    #color;
+    #score;
+    #isEliminated;
+
     constructor(name, color) {
-        this._name = name;
-        this._color = color;
-        this._score = 0;
-        this._isEliminated = false;
+        this.#name = name;
+        this.#color = color;
+        this.#score = 0;
+        this.#isEliminated = false;
     }
 
     get name() {
-        return this._name;
+        return this.#name;
     }
 
     get color() {
-        return this._color;
+        return this.#color;
     }
 
     get score() {
-        return this._score;
+        return this.#score;
     }
 
     get isEliminated() {
-        return this._isEliminated;
+        return this.#isEliminated;
     }
 
     reset() {
-        this._score = 0;
-        this._isEliminated = false;
+        this.#score = 0;
+        this.#isEliminated = false;
     }
 
     eliminate() {
-        this._isEliminated = true;
+        this.#isEliminated = true;
     }
 
     earnPoint() {
-        this._score += 1;
+        this.#score += 1;
     }
 }
