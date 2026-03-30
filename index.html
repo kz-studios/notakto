@@ -29,9 +29,11 @@
                         <legend>Number of Players:</legend>
 
                         <div class="controls" data-setting="numOfPlayers" data-step="1" data-min="2" data-max="5">
-                            <button type="button" class="btn-decrease">&lt;</button>
-                            <span>2</span>
-                            <button type="button" class="btn-increase">&gt;</button>
+                            <div class="stepper-group">
+                                <button type="button" class="btn-decrease">&lt;</button>
+                                <span></span>
+                                <button type="button" class="btn-increase">&gt;</button>
+                            </div>
                         </div>
                     </fieldset>
 
@@ -39,39 +41,47 @@
                         <legend>Number of Grids:</legend>
 
                         <div class="controls" data-setting="numOfGrids" data-step="1" data-min="2" data-max="5">
-                            <button type="button" class="btn-decrease">&lt;</button>
-                            <span>3</span>
-                            <button type="button" class="btn-increase">&gt;</button>
+                            <div class="stepper-group">
+                                <button type="button" class="btn-decrease">&lt;</button>
+                                <span></span>
+                                <button type="button" class="btn-increase">&gt;</button>
+                            </div>
                         </div>
                     </fieldset>
 
                     <fieldset id="number-of-rounds-option-fieldset" class="game-settings-option">
                         <legend>Number of Rounds:</legend>
 
-                        <div class="controls" data-setting="numOfRounds" data-step="1" data-min="1" data-max="5">
-                            <button type="button" class="btn-decrease">&lt;</button>
-                            <span>3</span>
-                            <button type="button" class="btn-increase">&gt;</button>
+                        <div class="controls" data-setting="numOfRounds" data-step="1" data-min="1" data-max="30">
+                            <div class="stepper-group">
+                                <button type="button" class="btn-decrease">&lt;</button>
+                                <span></span>
+                                <button type="button" class="btn-increase">&gt;</button>
+                            </div>
                         </div>
                     </fieldset>
 
                     <fieldset id="player-turn-time-limit-option-fieldset" class="game-settings-option">
                         <legend>Player Turn Time Limit:</legend>
 
-                        <div class="controls" data-setting="playerTurnTimeLimit" data-step="1" data-min="3" data-max="10">
-                            <button type="button" class="btn-decrease">&lt;</button>
-                            <span>10sec</span>
-                            <button type="button" class="btn-increase">&gt;</button>
+                        <div class="controls" data-setting="playerTurnTimeLimit" data-step="1" data-min="3" data-max="10" data-unit="sec">
+                            <div class="stepper-group">
+                                <button type="button" class="btn-decrease">&lt;</button>
+                                <span></span>
+                                <button type="button" class="btn-increase">&gt;</button>
+                            </div>
                         </div>
                     </fieldset>
 
                     <fieldset id="game-time-limit-option-fieldset" class="game-settings-option">
                         <legend>Game Time Limit:</legend>
 
-                        <div class="controls" data-setting="gameTimeLimit" data-step="30" data-min="30" data-max="300">
-                            <button type="button" class="btn-decrease">&lt;</button>
-                            <span>300sec</span>
-                            <button type="button" class="btn-increase">&gt;</button>
+                        <div class="controls" data-setting="gameTimeLimit" data-step="30" data-min="30" data-max="300" data-unit="sec">
+                            <div class="stepper-group">
+                                <button type="button" class="btn-decrease">&lt;</button>
+                                <span></span>
+                                <button type="button" class="btn-increase">&gt;</button>
+                            </div>
                             <input type="checkbox" id="checkbox-game-time-limit">
                             <label for="checkbox-game-time-limit">No time limit</label>
                         </div>

@@ -118,3 +118,30 @@ fieldset {
 #game-settings-container .game-settings-option {
     display: contents;
 }
+
+#game-settings-container .controls {
+    display: flex;
+    align-items: center;
+}
+
+#game-settings-container .controls .stepper-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#game-settings-container span {
+    width: 40px; 
+    text-align: center;
+    user-select: none;
+}
+
+.game-settings-option .disabled {
+    opacity: 0.3;
+    pointer-events: none;
+    cursor: default;
+}
+
+#checkbox-game-time-limit {
+    margin-left: 20px;
+}
