@@ -35,7 +35,7 @@ button {
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 h1.game-title {
@@ -144,4 +144,23 @@ fieldset {
 
 #checkbox-game-time-limit {
     margin-left: 20px;
+}
+
+#player-settings-container {
+    border: 1px solid black;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+#player-settings-container legend {
+    flex: 0 0 auto;
+}
+
+#player-cards-row-container {
+    border: 1px solid black;
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
 }
