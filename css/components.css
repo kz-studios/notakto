@@ -48,10 +48,28 @@
 
 .game-setup-player-card {
     display: flex;
+    align-items: center;
+}
+
+.game-setup-player-card button {
+    flex: 1;
+}
+
+.game-setup-player-card .game-setup-player-card-fields-container {
+    flex: 0 0 auto;
+    margin: 5px 10px;
+}
+
+.game-setup-player-card-fields-container {
+    display: flex;
     flex-direction: column;
     gap: 8px;
     padding: 12px;
     border: 1px solid #ccc;
+}
+
+.game-setup-player-card button:disabled {
+    display: none; 
 }
 
 .card-row {

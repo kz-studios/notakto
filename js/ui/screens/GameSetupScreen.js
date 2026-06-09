@@ -1,4 +1,5 @@
 import gameConfig from '../../core/GameConfig.js'
+import PlayerCard from '../components/GameSetupPlayerCard.js'
 
 export default class GameSetupScreen {
     constructor() {
@@ -6,6 +7,7 @@ export default class GameSetupScreen {
         this.settingsForm = this.screen.querySelector('#screen-game-setup-settings-container');
         this.gameSettingsContainer = this.settingsForm.querySelector('#game-settings-container');
         this.playerCardsContainer = this.settingsForm.querySelector('#player-cards-row-container');
+        this.playerCards = [];
         this.controlElements = this.settingsForm.querySelectorAll('.game-settings-option .controls');
         this.chkNoTimeLimit = this.settingsForm.querySelector('#checkbox-game-time-limit');
 
@@ -69,6 +71,32 @@ export default class GameSetupScreen {
                 this.updateColorAvailability();
             }
         });
+
+        this.playerCardsContainer.addEventListener('card-move-request', (event) => {
+            const direction = event.detail.direction;
+            const cardElement = event.detail.cardElement;
+            let targetCard;
+            
+            if (direction === 'left') {
+                targetCard = cardElement.previousElementSibling;
+            } else if (direction === 'right') {
+                const next = cardElement.nextElementSibling;
+                targetCard = next?.nextElementSibling;
+            }
+
+            if (targetCard !== undefined) {
+                cardElement.parentNode.insertBefore(cardElement, targetCard);
+            }
+
+            const currentPlayerCardsDOMOrder = Array.from(this.playerCardsContainer.children);
+
+            const newlySortedPlayers = currentPlayerCardsDOMOrder.map(domNode => {
+                return this.playerCards.find(instance => instance.card === domNode);
+            });
+
+            this.playerCards = newlySortedPlayers;
+            this.updateMovementControls();
+        });
     }
 
     renderGameSetupValues() {
@@ -103,96 +131,39 @@ export default class GameSetupScreen {
     }
 
     generatePlayerCards() {
-        const colors = ["Red", "Blue", "Green", "Yellow", "Black"];
-
         for (let i = 1; i <= 5; i++) {
-            const playerCard = document.createElement('div');
-            playerCard.classList.add('game-setup-player-card');
-
-            const titleRow = document.createElement('div');
-            titleRow.classList.add('card-row');
-            titleRow.textContent = `Card ${i}`;
-
-            const nameRow = document.createElement('div');
-            nameRow.classList.add('card-row');
-
-            const nameLabel = document.createElement('label');
-            nameLabel.textContent = "Name:";
-
-            const nameInput = document.createElement('input');
-            nameInput.type = "text";
-
-            nameRow.append(nameLabel, nameInput);
-
-            const colorRow = document.createElement('div');
-            colorRow.classList.add('card-row');
-
-            const colorLabel = document.createElement('label');
-            const colorSelectId = `player-color-${i}`;
-
-            colorLabel.textContent = "Color:";
-            colorLabel.setAttribute("for", colorSelectId);
-
-            const colorSelect = document.createElement('select');
-            colorSelect.name = "colors";
-            colorSelect.id = colorSelectId;
-
-            const defaultOption = document.createElement('option');
-            defaultOption.value = "";
-            defaultOption.textContent = "Select color";
-            defaultOption.disabled = true;
-            defaultOption.selected = true;
-
-            colorSelect.appendChild(defaultOption);
-
-            colors.forEach(color => {
-                const option = document.createElement('option');
-                option.value = color.toLowerCase();
-                option.textContent = color;
-                colorSelect.appendChild(option);
-            });
-
-            colorRow.append(colorLabel, colorSelect);
-
-            playerCard.append(titleRow, nameRow, colorRow);
-
-            this.playerCardsContainer.appendChild(playerCard);
+            const playerCard = new PlayerCard(i);
+            this.playerCards.push(playerCard);
+            this.playerCardsContainer.appendChild(playerCard.card);
         }
     }
 
     syncPlayerCardVisibility() {
-        const playerCards = this.playerCardsContainer.querySelectorAll('.game-setup-player-card');
-
-        playerCards.forEach((card, index) => {
+        this.playerCards.forEach((card, index) => {
             const cardNumber = index + 1;
-            card.classList.toggle('hidden', cardNumber > gameConfig.numOfPlayers);
-        });
+            card.setHidden(cardNumber > gameConfig.numOfPlayers);
+        })
+        this.updateMovementControls();
     }
 
     updateColorAvailability() {
-        const visibleSelects = this.playerCardsContainer.querySelectorAll('.game-setup-player-card:not(.hidden) select');
-        const takenColors = [];
+        const takenColors = this.playerCards
+            .filter(card => !card.isHidden && card.getSelectedColor() !== '')
+            .map(card => card.getSelectedColor());
 
-        visibleSelects.forEach(select => {
-            if (select.value !== "") takenColors.push(select.value);
+        this.playerCards.forEach(card => {
+            card.disableTakenColors(takenColors);
         });
+    }
 
-        const allSelects = this.playerCardsContainer.querySelectorAll('select');
+    updateMovementControls() {
+        const visibleCards = this.playerCards.filter(card => !card.isHidden);
+        const firstCard = visibleCards[0];
+        const lastCard = visibleCards[visibleCards.length - 1];
 
-        allSelects.forEach(select => {
-            const isHidden = select.closest('.game-setup-player-card').classList.contains('hidden');
-
-            if (isHidden && takenColors.includes(select.value)) {
-                select.value = "";
-            }
-
-            const options = select.querySelectorAll('option');
-
-            options.forEach(option => {
-                if (option.value === "") return;
-
-                option.disabled = takenColors.includes(option.value) && option.value !== select.value;
-            });
-        });
+        this.playerCards.forEach(card => {
+            card.setMoveLeftDisabled(card === firstCard);
+            card.setMoveRightDisabled(card === lastCard);
+        })
     }
 }
