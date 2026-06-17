@@ -1,3 +1,4 @@
+import gameEngine from "../../core/GameEngine.js"
 import gameConfig from '../../core/GameConfig.js'
 import PlayerCard from '../components/GameSetupPlayerCard.js'
 
@@ -97,6 +98,11 @@ export default class GameSetupScreen {
             this.playerCards = newlySortedPlayers;
             this.updateMovementControls();
         });
+
+        this.settingsForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            gameEngine.registerPlayers(this.queuePlayersToBeRegistered());
+        })
     }
 
     renderGameSetupValues() {
@@ -165,5 +171,15 @@ export default class GameSetupScreen {
             card.setMoveLeftDisabled(card === firstCard);
             card.setMoveRightDisabled(card === lastCard);
         })
+    }
+
+    queuePlayersToBeRegistered() {
+        return this.playerCards
+            .filter(card => !card.isHidden)
+            .map(card => {
+                const playerName = card.getNameInput();
+                const playerColor = card.getSelectedColor();
+                return new PlayerCard(playerName, playerColor);
+            })
     }
 }

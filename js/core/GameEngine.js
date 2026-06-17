@@ -10,6 +10,8 @@ class GameEngine {
             0b100010001,
             0b001010100
         ];
+        this.AllPlayersInOrder = [];
+        this.currentTurnIndex = 0;
     }
 
     doesGridHaveThreeXInARow(gridState) {
@@ -17,6 +19,10 @@ class GameEngine {
             if ((gridState & killingMask) === killingMask) return true;
         }
         return false;
+    }
+
+    registerPlayers(players) {
+        this.AllPlayersInOrder = players;
     }
 }
 
