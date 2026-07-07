@@ -57,6 +57,9 @@ export default class GameSetupPlayerCard {
     setHidden(isHidden) {
         this.#isHidden = isHidden;
         this.card.classList.toggle('hidden', isHidden);
+
+        this.nameInputField.disabled = isHidden;
+        this.colorSelectField.disabled = isHidden;
     }
 
     disableTakenColors(takenColorsArray) {

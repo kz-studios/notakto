@@ -131,7 +131,7 @@
 
                         <div class="card-row game-setup-player-card-name-field">
                             <label>Name:</label>
-                            <input type="text" size="12" maxlength="12">
+                            <input type="text" size="12" maxlength="12" required>
                         </div>
 
                         <div class="card-row game-setup-player-card-color-field">
@@ -153,7 +153,10 @@
         </section>
 
         <section id="screen-gameplay" class="screen hidden">
-            <h2>Gameplay</h2>
+            <div id="player-turn-display-container">
+                <p id="current-player-turn-display">Player's Turn</p>
+                <p id="next-player-turn-display">Next: next player</p>
+            </div>
             
             <section id="grid-container">
 

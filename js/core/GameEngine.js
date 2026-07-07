@@ -24,6 +24,23 @@ class GameEngine {
     registerPlayers(players) {
         this.AllPlayersInOrder = players;
     }
+
+    getCurrentPlayer() {
+        return this.AllPlayersInOrder[this.currentTurnIndex];
+    }
+
+    getNextPlayer() {
+        const players = this.AllPlayersInOrder;
+        const nextPlayer = (() => {
+            for (let i = 1; i <= players.length; i++) {
+                const p = players[(this.currentTurnIndex + i) % players.length];
+                if (!p.isEliminated) return p;
+            }
+            return null;
+        })();
+
+        return nextPlayer;
+    }
 }
 
 const instance = new GameEngine();

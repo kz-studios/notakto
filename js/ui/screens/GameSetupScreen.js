@@ -1,6 +1,7 @@
-import gameEngine from "../../core/GameEngine.js"
+import gameEngine from '../../core/GameEngine.js'
 import gameConfig from '../../core/GameConfig.js'
-import PlayerCard from '../components/GameSetupPlayerCard.js'
+import PlayerCard from '../components/GameSetupPlayerCard.js';
+import Player from '../../core/Player.js';
 
 export default class GameSetupScreen {
     constructor() {
@@ -100,9 +101,29 @@ export default class GameSetupScreen {
         });
 
         this.settingsForm.addEventListener('submit', (e) => {
-            e.preventDefault();
+            const visibleCards = this.playerCards.filter(card => !card.isHidden);
+            const nameInputs = visibleCards.map(card => card.card.querySelector('.game-setup-player-card-name-field input'));
+
+            this.validateDuplicates(nameInputs);
+
+            if (!this.settingsForm.checkValidity()) {
+                e.preventDefault();
+                this.settingsForm.reportValidity();
+                return;
+            }
+
+            e.preventDefault(); 
             gameEngine.registerPlayers(this.queuePlayersToBeRegistered());
-        })
+        });
+
+        this.settingsForm.addEventListener('input', (event) => {
+            if (event.target.matches('.game-setup-player-card-name-field input')) {
+                const visibleCards = this.playerCards.filter(card => !card.isHidden);
+                const nameInputs = visibleCards.map(card => card.card.querySelector('.game-setup-player-card-name-field input'));
+                
+                this.validateDuplicates(nameInputs);
+            }
+        });
     }
 
     renderGameSetupValues() {
@@ -179,7 +200,24 @@ export default class GameSetupScreen {
             .map(card => {
                 const playerName = card.getNameInput();
                 const playerColor = card.getSelectedColor();
-                return new PlayerCard(playerName, playerColor);
+                return new Player(playerName, playerColor); 
             })
+    }
+
+    validateDuplicates(inputs) {
+        const seenNames = new Set();
+
+        inputs.forEach(input => {
+            const name = input.value.trim().toLowerCase();
+            
+            if (name === '') return; 
+
+            if (seenNames.has(name)) {
+                input.setCustomValidity("Players can't have same names.");
+            } else {
+                input.setCustomValidity("");
+                seenNames.add(name);
+            }
+        });
     }
 }

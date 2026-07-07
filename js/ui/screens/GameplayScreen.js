@@ -6,6 +6,8 @@ export default class GameplayScreen {
     constructor() {
         this.grids = [];
         this.screen = document.querySelector('#screen-gameplay');
+        this.currentPlayerDisplay = this.screen.querySelector('#current-player-turn-display');
+        this.nextPlayerDisplay = this.screen.querySelector('#next-player-turn-display');
         this.gridContainer = this.screen.querySelector('#grid-container');
     }
 
@@ -37,6 +39,9 @@ export default class GameplayScreen {
                         gridElement.classList.add('dead');
                         console.log(`Grid-${currentGrid.id} dead`)
                     }
+
+                    gameEngine.currentTurnIndex = (gameEngine.currentTurnIndex + 1) % gameEngine.AllPlayersInOrder.length;
+                    this.updateTurnDisplay();
                 });
             }
 
@@ -48,5 +53,13 @@ export default class GameplayScreen {
     clearGrids() {
         this.grids = [];
         this.gridContainer.innerHTML = '';
+    }
+
+    updateTurnDisplay() {
+        const currentPlayer = gameEngine.getCurrentPlayer();
+        const nextPlayer = gameEngine.getNextPlayer();
+
+        this.currentPlayerDisplay.innerHTML = `${currentPlayer.name}'s turn`;
+        this.nextPlayerDisplay.innerHTML = `Next: ${nextPlayer.name}`;
     }
 }

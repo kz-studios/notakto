@@ -22,6 +22,7 @@ export default class ScreenManager {
             
             this.gameplayScreen.clearGrids();
             this.gameplayScreen.renderGrids();
+            this.gameplayScreen.updateTurnDisplay();
             this.switch('screen-gameplay');
         })
 

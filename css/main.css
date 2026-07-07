@@ -162,3 +162,20 @@ fieldset {
     flex-direction: row;
     gap: 12px;
 }
+
+#player-turn-display-container {
+    width: 400px;
+    margin-bottom: 50px;
+    text-align: left;
+}
+
+#current-player-turn-display {
+    margin: 0;
+    font-size: 36px;
+    font-family: "Luckiest Guy";
+}
+
+#next-player-turn-display {
+    margin: 0;
+    font-size: 24px;
+}
