@@ -163,6 +163,13 @@ fieldset {
     gap: 12px;
 }
 
+#game-timer-display-container {
+    position: absolute;
+    top: 20px;
+    left: 40px;
+    font-size: 24px;
+}
+
 #player-turn-display-container {
     width: 400px;
     margin-bottom: 50px;

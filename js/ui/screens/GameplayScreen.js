@@ -1,11 +1,12 @@
-import gameEngine from "../../core/GameEngine.js";
+import gameEngine from '../../core/GameEngine.js';
 import gameConfig from '../../core/GameConfig.js'
-import Grid from "../../core/Grid.js";
+import Grid from '../../core/Grid.js';
 
 export default class GameplayScreen {
     constructor() {
         this.grids = [];
         this.screen = document.querySelector('#screen-gameplay');
+        this.gameTimer = document.querySelector('#game-timer');
         this.currentPlayerDisplay = this.screen.querySelector('#current-player-turn-display');
         this.nextPlayerDisplay = this.screen.querySelector('#next-player-turn-display');
         this.gridContainer = this.screen.querySelector('#grid-container');
@@ -61,5 +62,17 @@ export default class GameplayScreen {
 
         this.currentPlayerDisplay.innerHTML = `${currentPlayer.name}'s turn`;
         this.nextPlayerDisplay.innerHTML = `Next: ${nextPlayer.name}`;
+    }
+
+    convertToMMSSFormat(timeInSec) {
+        const minutes = Math.floor(timeInSec / 60);
+        const seconds = timeInSec % 60;
+
+        const formattedMinutes = String(minutes).padStart(2, '0');
+        const formattedSeconds = String(seconds).padStart(2, '0');
+
+        const displayString = `${formattedMinutes}:${formattedSeconds}`;
+
+        return displayString;
     }
 }

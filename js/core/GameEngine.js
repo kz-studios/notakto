@@ -12,6 +12,8 @@ class GameEngine {
         ];
         this.AllPlayersInOrder = [];
         this.currentTurnIndex = 0;
+
+        this.gameTimerId = null;
     }
 
     doesGridHaveThreeXInARow(gridState) {
@@ -40,6 +42,26 @@ class GameEngine {
         })();
 
         return nextPlayer;
+    }
+
+    startGameTimer(duration, onTick) {
+        let timeLeft = duration;
+
+        onTick(timeLeft);
+
+        this.gameTimerId = setInterval(() => {
+            timeLeft--;
+            onTick(timeLeft);
+
+            if (timeLeft <= 0) {
+                clearInterval(this.gameTimerId);
+                // TODO: Game over logic
+            }
+        }, 1000)
+    }
+
+    stopGameTimer() {
+        clearInterval(this.gameTimerId);
     }
 }
 
