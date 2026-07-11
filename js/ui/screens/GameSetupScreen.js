@@ -4,8 +4,11 @@ import PlayerCard from '../components/GameSetupPlayerCard.js';
 import Player from '../../core/Player.js';
 
 export default class GameSetupScreen {
+    #screenId;
+
     constructor() {
         this.screen = document.querySelector('#screen-game-setup');
+        this.screenId = this.screen.id;
         this.settingsForm = this.screen.querySelector('#screen-game-setup-settings-container');
         this.gameSettingsContainer = this.settingsForm.querySelector('#game-settings-container');
         this.playerCardsContainer = this.settingsForm.querySelector('#player-cards-row-container');
@@ -124,6 +127,18 @@ export default class GameSetupScreen {
                 this.validateDuplicates(nameInputs);
             }
         });
+    }
+
+    get id() {
+        return this.screenId;
+    }
+
+    show() {
+        this.screen.classList.replace('hidden', 'active');
+    }
+
+    hide() {
+        this.screen.classList.replace('active', 'hidden');
     }
 
     renderGameSetupValues() {

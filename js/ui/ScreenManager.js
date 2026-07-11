@@ -9,7 +9,8 @@ export default class ScreenManager {
         this.titleScreen = new TitleScreen();
         this.gameSetupScreen = new GameSetupScreen();
         this.gameplayScreen = new GameplayScreen();
-        this.screens = document.querySelectorAll('.screen');
+        this.screens = [this.titleScreen, this.gameSetupScreen, this.gameplayScreen];
+        this.currentScreen = this.titleScreen;
 
         this.titleScreen.btnPlay.addEventListener('click', () => {
             this.switch('screen-game-setup');
@@ -43,11 +44,10 @@ export default class ScreenManager {
         // DEV: Quick exit from screens
         document.addEventListener('keydown', (event) => {
             if (event.key === 'Escape') {
-                for (let i = 1; i < this.screens.length; i++) {
-                    if (this.screens[i].classList.contains('active')) {
-                        this.switch(this.screens[i-1].id);
-                        break;
-                    }
+                const currentIndex = this.screens.indexOf(this.currentScreen);
+                
+                if (currentIndex > 0) {
+                    this.switch(this.screens[currentIndex - 1].id);
                 }
             }
         });
@@ -56,9 +56,10 @@ export default class ScreenManager {
     switch(targetScreen) {
         for (const screen of this.screens) {
             if (screen.id === targetScreen) {
-                screen.classList.replace('hidden', 'active');
+                this.currentScreen = screen;
+                screen.show();
             } else {
-                screen.classList.replace('active', 'hidden');
+                screen.hide();
             }
         }
     }

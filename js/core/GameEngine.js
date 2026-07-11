@@ -62,6 +62,7 @@ class GameEngine {
 
     stopGameTimer() {
         clearInterval(this.gameTimerId);
+        this.gameTimerId = null;
     }
 }
 

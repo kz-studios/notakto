@@ -3,13 +3,28 @@ import gameConfig from '../../core/GameConfig.js'
 import Grid from '../../core/Grid.js';
 
 export default class GameplayScreen {
+    #screenId;
+
     constructor() {
-        this.grids = [];
         this.screen = document.querySelector('#screen-gameplay');
+        this.screenId = this.screen.id;
         this.gameTimer = document.querySelector('#game-timer');
         this.currentPlayerDisplay = this.screen.querySelector('#current-player-turn-display');
         this.nextPlayerDisplay = this.screen.querySelector('#next-player-turn-display');
         this.gridContainer = this.screen.querySelector('#grid-container');
+        this.grids = [];
+    }
+
+    get id() {
+        return this.screenId;
+    }
+
+    show() {
+        this.screen.classList.replace('hidden', 'active');
+    }
+
+    hide() {
+        this.screen.classList.replace('active', 'hidden');
     }
 
     renderGrids() {
