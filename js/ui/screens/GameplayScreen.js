@@ -25,6 +25,7 @@ export default class GameplayScreen {
 
     hide() {
         this.screen.classList.replace('active', 'hidden');
+        gameEngine.stopGameTimer();
     }
 
     renderGrids() {

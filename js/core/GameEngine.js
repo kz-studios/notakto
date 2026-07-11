@@ -45,6 +45,8 @@ class GameEngine {
     }
 
     startGameTimer(duration, onTick) {
+        this.stopGameTimer();
+
         let timeLeft = duration;
 
         onTick(timeLeft);
