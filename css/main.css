@@ -71,6 +71,8 @@ h1.game-title {
     color: white;
 }
 
+/* Game Setup */
+
 #screen-game-setup {
     position: relative;
 }
@@ -162,6 +164,8 @@ fieldset {
     flex-direction: row;
     gap: 12px;
 }
+
+/* Gameplay Screen */
 
 #game-timer-display-container {
     position: absolute;
