@@ -12,26 +12,10 @@ export default class ScreenManager {
         this.screens = [this.titleScreen, this.gameSetupScreen, this.gameplayScreen];
         this.currentScreen = this.titleScreen;
 
-        this.gameSetupScreen.settingsForm.addEventListener('submit', (event) => {
-            event.preventDefault(); 
-            
-            this.gameplayScreen.clearGrids();
-            this.gameplayScreen.renderGrids();
-            this.gameplayScreen.updateTurnDisplay();
         this.titleScreen.screen.addEventListener('request-navigation', (event) => {
             this.switch(event.detail.target);
         });
 
-            if (!gameConfig.isThereNoGameTimeLimit) {
-                const duration = gameConfig.gameTimeLimit;
-                
-                gameEngine.startGameTimer(duration, (timeLeft) => {
-                    const formattedTime = this.gameplayScreen.convertToMMSSFormat(timeLeft);
-                    this.gameplayScreen.gameTimer.innerHTML = formattedTime;
-                });
-            } else {
-                this.gameplayScreen.gameTimer.innerHTML = '∞'; 
-            }
         this.gameSetupScreen.screen.addEventListener('request-navigation', (event) => {
             this.switch(event.detail.target);
         });

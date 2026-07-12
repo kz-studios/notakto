@@ -123,6 +123,8 @@ export default class GameSetupScreen {
 
             e.preventDefault(); 
             gameEngine.registerPlayers(this.queuePlayersToBeRegistered());
+
+            this.screen.dispatchEvent(new CustomEvent('setup-complete'));
         });
 
         this.settingsForm.addEventListener('input', (event) => {
