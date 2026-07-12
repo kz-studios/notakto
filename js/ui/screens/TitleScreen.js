@@ -5,7 +5,7 @@ export default class TitleScreen {
         this.screen = document.querySelector('#screen-title');
         this.screenId = this.screen.id;
         this.btnPlay = this.screen.querySelector('.btn-play');
-        this.btnHowToPlay = this.screen.querySelector('.btn-how-to-play');
+        this.btnHowToPlay = this.screen.querySelector('#btn-title-screen-how-to-play');
 
         this.btnPlay.addEventListener('click', () => {
             this.screen.dispatchEvent(new CustomEvent('request-navigation', { 
