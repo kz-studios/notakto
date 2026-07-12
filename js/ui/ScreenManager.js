@@ -12,20 +12,15 @@ export default class ScreenManager {
         this.screens = [this.titleScreen, this.gameSetupScreen, this.gameplayScreen];
         this.currentScreen = this.titleScreen;
 
-        this.titleScreen.btnPlay.addEventListener('click', () => {
-            this.switch('screen-game-setup');
-        })
-
-        this.gameSetupScreen.btnBack.addEventListener('click', () => {
-            this.switch('screen-title');
-        })
-
         this.gameSetupScreen.settingsForm.addEventListener('submit', (event) => {
             event.preventDefault(); 
             
             this.gameplayScreen.clearGrids();
             this.gameplayScreen.renderGrids();
             this.gameplayScreen.updateTurnDisplay();
+        this.titleScreen.screen.addEventListener('request-navigation', (event) => {
+            this.switch(event.detail.target);
+        });
 
             if (!gameConfig.isThereNoGameTimeLimit) {
                 const duration = gameConfig.gameTimeLimit;
@@ -37,6 +32,9 @@ export default class ScreenManager {
             } else {
                 this.gameplayScreen.gameTimer.innerHTML = '∞'; 
             }
+        this.gameSetupScreen.screen.addEventListener('request-navigation', (event) => {
+            this.switch(event.detail.target);
+        });
 
             this.switch('screen-gameplay');
         })

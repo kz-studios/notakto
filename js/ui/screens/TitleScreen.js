@@ -6,6 +6,12 @@ export default class TitleScreen {
         this.screenId = this.screen.id;
         this.btnPlay = this.screen.querySelector('.btn-play');
         this.btnHowToPlay = this.screen.querySelector('.btn-how-to-play');
+
+        this.btnPlay.addEventListener('click', () => {
+            this.screen.dispatchEvent(new CustomEvent('request-navigation', { 
+                detail: { target: 'screen-game-setup' } 
+            }));
+        });
     }
 
     get id() {

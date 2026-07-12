@@ -20,6 +20,12 @@ export default class GameSetupScreen {
         this.btnHowToPlay = this.screen.querySelector('.btn-how-to-play');
         this.btnStart = this.screen.querySelector('.btn-start');
 
+        this.btnBack.addEventListener('click', () => {
+            this.screen.dispatchEvent(new CustomEvent('request-navigation', { 
+                detail: { target: 'screen-title' } 
+            }));
+        });
+
         this.renderGameSetupValues();
         this.generatePlayerCards();
         this.syncPlayerCardVisibility();
