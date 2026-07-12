@@ -16,9 +16,9 @@ export default class GameSetupScreen {
         this.controlElements = this.settingsForm.querySelectorAll('.game-settings-option .controls');
         this.chkNoTimeLimit = this.settingsForm.querySelector('#checkbox-game-time-limit');
 
-        this.btnBack = this.screen.querySelector('.btn-back');
-        this.btnHowToPlay = this.screen.querySelector('.btn-how-to-play');
-        this.btnStart = this.screen.querySelector('.btn-start');
+        this.btnBack = this.screen.querySelector('#btn-back-game-setup-screen');
+        this.btnHowToPlay = this.screen.querySelector('#btn-how-to-play-game-setup-screen');
+        this.btnStart = this.screen.querySelector('#btn-start-game-setup-screen');
 
         this.btnBack.addEventListener('click', () => {
             this.screen.dispatchEvent(new CustomEvent('request-navigation', { 
