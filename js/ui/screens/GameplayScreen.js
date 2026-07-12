@@ -28,6 +28,23 @@ export default class GameplayScreen {
         gameEngine.stopGameTimer();
     }
 
+    startNewGame() {
+        this.clearGrids();
+        this.renderGrids();
+        this.updateTurnDisplay();
+
+        if (!gameConfig.isThereNoGameTimeLimit) {
+            const duration = gameConfig.gameTimeLimit;
+            
+            gameEngine.startGameTimer(duration, (timeLeft) => {
+                const formattedTime = this.convertToMMSSFormat(timeLeft);
+                this.gameTimer.innerHTML = formattedTime;
+            });
+        } else {
+            this.gameTimer.innerHTML = '∞'; 
+        }
+    }
+
     renderGrids() {
         const currentNumOfGrids = gameConfig.numOfGrids;
         for (let i = 1; i <= currentNumOfGrids; i++) {

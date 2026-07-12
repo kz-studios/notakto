@@ -20,8 +20,10 @@ export default class ScreenManager {
             this.switch(event.detail.target);
         });
 
+        this.gameSetupScreen.screen.addEventListener('setup-complete', () => {
+            this.gameplayScreen.startNewGame();
             this.switch('screen-gameplay');
-        })
+        });
 
         // DEV: Quick exit from screens
         document.addEventListener('keydown', (event) => {
