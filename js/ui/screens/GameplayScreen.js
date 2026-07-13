@@ -8,11 +8,19 @@ export default class GameplayScreen {
     constructor() {
         this.screen = document.querySelector('#screen-gameplay');
         this.screenId = this.screen.id;
+        this.btnPause = this.screen.querySelector('#btn-pause');
         this.gameTimer = document.querySelector('#game-timer');
         this.currentPlayerDisplay = this.screen.querySelector('#current-player-turn-display');
         this.nextPlayerDisplay = this.screen.querySelector('#next-player-turn-display');
         this.gridContainer = this.screen.querySelector('#grid-container');
         this.grids = [];
+
+        this.btnPause.addEventListener('click', () => {
+            this.screen.dispatchEvent(new CustomEvent('request-dialog',  {
+                detail: { dialog: 'pause-menu' },
+                bubbles: true
+            }));
+        })
     }
 
     get id() {
