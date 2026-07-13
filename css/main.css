@@ -167,6 +167,12 @@ fieldset {
 
 /* Gameplay Screen */
 
+#screen-gameplay #pause-button-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
 #game-timer-display-container {
     position: absolute;
     top: 20px;

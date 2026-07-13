@@ -87,6 +87,26 @@
 
 /* Gameplay Screen */
 
+#dialog-pause-menu-content-container {
+    text-align: center;
+}
+
+#dialog-pause-menu {
+    width: 300px;
+}
+
+#dialog-pause-menu h2 {
+    font-size: 50px;
+    margin: 0;
+}
+
+#pause-menu-options-container {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
 #grid-container {
     display: flex;
     width: 100vw;
