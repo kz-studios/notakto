@@ -5,18 +5,25 @@
     width: 600px;
 }
 
-#dialog-how-to-play[open] {
+.modal {
+    position: relative;
+    padding-top: 30px;
+}
+
+.modal[open] {
     display: flex;
     flex-direction: column;
 }
 
-#dialog-how-to-play::backdrop {
+.modal::backdrop {
     background-color: rgba(0, 0, 0, 0.6);
 }
 
 .close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
     color: red;
-    align-self: flex-end;
     font-size: 20px;
 }
 
