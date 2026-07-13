@@ -26,6 +26,13 @@ export default class GameSetupScreen {
             }));
         });
 
+        this.btnHowToPlay.addEventListener('click', () => {
+            this.screen.dispatchEvent(new CustomEvent('request-dialog', { 
+                detail: { dialog: 'how-to-play' },
+                bubbles: true 
+            }));
+        });
+
         this.renderGameSetupValues();
         this.generatePlayerCards();
         this.syncPlayerCardVisibility();

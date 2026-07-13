@@ -12,6 +12,13 @@ export default class TitleScreen {
                 detail: { target: 'screen-game-setup' } 
             }));
         });
+
+        this.btnHowToPlay.addEventListener('click', () => {
+            this.screen.dispatchEvent(new CustomEvent('request-dialog', { 
+                detail: { dialog: 'how-to-play' },
+                bubbles: true 
+            }));
+        });
     }
 
     get id() {
