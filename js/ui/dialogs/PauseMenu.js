@@ -13,6 +13,13 @@ export default class PauseMenu {
             this.closeDialog();
         })
 
+        this.btnHowToPlay.addEventListener('click', () => {
+            this.dialogEl.dispatchEvent(new CustomEvent('request-dialog', {
+                detail: { dialog: 'how-to-play' },
+                bubbles: true 
+            }))
+        })
+
         this.btnExitToGameSetup.addEventListener('click', () => {
             this.closeDialog();
             document.dispatchEvent(new CustomEvent('request-navigation', {
