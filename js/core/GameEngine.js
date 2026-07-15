@@ -14,6 +14,8 @@ class GameEngine {
         this.currentTurnIndex = 0;
 
         this.gameTimerId = null;
+        this.onTickCallback = null;
+        this.timeLeft = 0;
     }
 
     doesGridHaveThreeXInARow(gridState) {
@@ -47,24 +49,38 @@ class GameEngine {
     startGameTimer(duration, onTick) {
         this.stopGameTimer();
 
-        let timeLeft = duration;
+        this.timeLeft = duration;
+        this.onTickCallback = onTick;
+        this.onTickCallback(this.timeLeft);
 
-        onTick(timeLeft);
+        this.resumeGameTimer();
+    }
+
+    resumeGameTimer() {
+        if (this.gameTimerId !== null) return;
 
         this.gameTimerId = setInterval(() => {
-            timeLeft--;
-            onTick(timeLeft);
+            this.timeLeft--;
+            this.onTickCallback(this.timeLeft);
 
-            if (timeLeft <= 0) {
-                clearInterval(this.gameTimerId);
+            if (this.timeLeft <= 0) {
+                this.stopGameTimer();
                 // TODO: Game over logic
             }
-        }, 1000)
+        }, 1000);
+    }
+
+    pauseGameTimer() {
+        if (this.gameTimerId !== null) {
+            clearInterval(this.gameTimerId);
+            this.gameTimerId = null;
+        }
     }
 
     stopGameTimer() {
-        clearInterval(this.gameTimerId);
-        this.gameTimerId = null;
+        this.pauseGameTimer();
+        this.timeLeft = 0;
+        this.onTickCallback = null;
     }
 }
 
