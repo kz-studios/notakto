@@ -7,7 +7,6 @@
 
 .modal {
     position: relative;
-    padding-top: 30px;
 }
 
 .modal[open] {
@@ -38,6 +37,10 @@
 
 .dot.active {
     background: darkgray;
+}
+
+.slides-container {
+    margin-top: 30px;
 }
 
 .slide-arrows {
@@ -87,12 +90,9 @@
 
 /* Gameplay Screen */
 
-#dialog-pause-menu-content-container {
-    text-align: center;
-}
-
 #dialog-pause-menu {
     width: 300px;
+    text-align: center;
 }
 
 #dialog-pause-menu h2 {
