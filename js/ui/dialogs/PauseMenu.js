@@ -6,7 +6,10 @@ export default class PauseMenu {
         this.btnExitToGameSetup = this.dialogEl.querySelector('#btn-exit-to-game-setup-screen');
         this.btnClose = this.dialogEl.querySelector('#btn-close-pause-menu-dialog');
 
-        this.btnClose.addEventListener('click', () => {
+        this.btnContinueGame.addEventListener('click', () => {
+            document.dispatchEvent(new CustomEvent('resume-timer', {
+                bubbles: true
+            }))
             this.closeDialog();
         })
     }

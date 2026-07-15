@@ -20,6 +20,11 @@ export default class GameplayScreen {
                 detail: { dialog: 'pause-menu' },
                 bubbles: true
             }));
+            gameEngine.pauseGameTimer();
+        })
+
+        document.addEventListener('resume-timer', () => {
+            gameEngine.resumeGameTimer();
         })
     }
 
