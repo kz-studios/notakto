@@ -12,11 +12,7 @@ export default class ScreenManager {
         this.screens = [this.titleScreen, this.gameSetupScreen, this.gameplayScreen];
         this.currentScreen = this.titleScreen;
 
-        this.titleScreen.screen.addEventListener('request-navigation', (event) => {
-            this.switch(event.detail.target);
-        });
-
-        this.gameSetupScreen.screen.addEventListener('request-navigation', (event) => {
+        document.addEventListener('request-navigation', (event) => {
             this.switch(event.detail.target);
         });
 

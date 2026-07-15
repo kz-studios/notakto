@@ -12,6 +12,14 @@ export default class PauseMenu {
             }))
             this.closeDialog();
         })
+
+        this.btnExitToGameSetup.addEventListener('click', () => {
+            this.closeDialog();
+            document.dispatchEvent(new CustomEvent('request-navigation', {
+                detail: { target: 'screen-game-setup'},
+                bubbles: true
+            }))
+        })
     }
 
     openDialog() {

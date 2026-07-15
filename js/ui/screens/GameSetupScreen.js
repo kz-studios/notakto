@@ -22,7 +22,8 @@ export default class GameSetupScreen {
 
         this.btnBack.addEventListener('click', () => {
             this.screen.dispatchEvent(new CustomEvent('request-navigation', { 
-                detail: { target: 'screen-title' } 
+                detail: { target: 'screen-title' } ,
+                bubbles: true
             }));
         });
 

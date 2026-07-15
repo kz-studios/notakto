@@ -9,7 +9,8 @@ export default class TitleScreen {
 
         this.btnPlay.addEventListener('click', () => {
             this.screen.dispatchEvent(new CustomEvent('request-navigation', { 
-                detail: { target: 'screen-game-setup' } 
+                detail: { target: 'screen-game-setup' },
+                bubbles: true
             }));
         });
 
